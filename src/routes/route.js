@@ -26,6 +26,7 @@ router.get('/movies/:indexNumber',function(req,res){
         }
     if(arr.length==1){
         res.send(arr[0])
+        // console.log(req)
 
 //problem 3:Handle a scenario in problem 2 where if the index is greater than the valid maximum value a message is returned that tells the user to use a valid index in an error message. 
     }else{
@@ -79,7 +80,26 @@ router.get('/films/:filmId',function(req,res){
         res.send('No movie exists with this id')
     }
 })
-   
+
+// let s=[
+//     {
+//         'brand':'puma',
+//         'size':3
+//     },
+//     {
+//         'brand':'puma',
+//         'size':4
+//     },
+//     {
+//         'brand':'nike',
+//         'size':2
+//     }
+//     ]
+    // router.get('/shoes?size=2&brand=nike',function(req,res){
+    //     console.log(req.query)
+    
+    // })
+
 
 // router.get("/profile-details", function(req, res){
 //     // Write the LOGIC here
@@ -140,11 +160,52 @@ router.get('/films/:filmId',function(req,res){
 // })
 
 // // Query Param example
+// let shoes=[{'brand':'nike',
+//             'size':2   },
+//     {'brand':'nike',
+//     'size':3 },
+//     {'brand':'addidas',
+//     'size':2 }]
 // router.get("/shoes", function(req, res){
 //     console.log("The filter options for shoes are -",req.query)
-//     //req.query.size
-//     //req.query.brand
-//     res.send("dummy shoes response")
+//     // req.query.size
+//     // req.query.brand
+//     res.send(req)
 // })
 
+// router.get('/cars',function(req,res){
+//     res.send(req.query)
+// })
+
+
+
+
+router.get("/sol1", function (req, res) {
+    let arr= [1,2,3,5,6,7]
+    let sum=0
+    arr.forEach((x)=>sum+=x)
+    let result=(arr[arr.length-1])*(arr[arr.length-1]+1)/2
+    let obj={'datamissing' : result-sum}
+    res.send(obj)
+    
+})
+
+router.get("/sol2", function (req, res) {
+    
+    let ar= [33, 34, 35, 37, 38]
+    let sum2=0
+    ar.forEach((x)=>sum2+=x)
+    let result2=((ar.length+1)*(ar[0]+ar[ar.length-1])/2)
+    let obj2={'datamissing' : result2-sum2}
+    res.send(obj2)
+
+
+})
+
+
+
+
+// router.get('/cars',function(req,res){
+//     res.send(req.query)
+// })
 module.exports = router;
