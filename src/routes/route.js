@@ -1,5 +1,56 @@
+const e = require('express');
 const express = require('express');
 const router = express.Router();
+
+//Assignment Querry vs Path params 
+let persons= [
+    {
+    name: "PK",
+    age: 10,
+    votingStatus: false
+ },
+ {
+    name: "SK",
+    age: 20,
+    votingStatus: false
+ },
+ {
+    name: "AA",
+    age: 70,
+    votingStatus: false
+ },
+ {
+    name: "SC",
+    age: 5,
+    votingStatus: false
+ },
+ {
+    name: "HO",
+    age: 40,
+    votingStatus: false
+ }
+ ]
+  
+router.post('/votingAge',function(req,res){
+    let input=req.query.Age
+    let rArr=[]
+    persons.forEach((x,y,z)=>{
+        if(x['age']>input){
+            x['votingStatus']=true
+            rArr.push(x)
+        }
+    })
+    res.send({data:rArr})
+}) 
+
+
+
+
+
+
+
+
+
 
 router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
