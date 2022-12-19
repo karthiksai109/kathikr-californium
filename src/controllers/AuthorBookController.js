@@ -28,9 +28,10 @@ const twoStates=async function(req,res){
     let v2=reqiredBook['author_id']
     
     let reqiredName=await AuthorModel1.findOne({author_id:{$eq:v2}}).select({_id:0,author_name:1})
-    
+    let price=reqiredBook['price']
+    let authorname=reqiredName['author_name']
 
-    res.send({msg:{reqiredBook}})
+    res.send({msg:{price,authorname}})
     }
 module.exports.twoStates=twoStates
 
