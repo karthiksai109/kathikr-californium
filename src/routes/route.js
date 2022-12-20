@@ -4,21 +4,25 @@ const UserModel= require("../models/userModel.js")
 const UserController= require("../controllers/userController")
 const BookModel=require("../models/bookModel")
 const BookControler=require("../controllers/bookController")
+const customCatController=require("../controllers/customCatController")
+
+//generating Customer Data
+router.post('/Customer',customCatController.preCustom)
+
+//generating aauto_increment for customer_Id
+router.post('/Cat',customCatController.preCad)
+//getCustomer
+router.get('/CustomerAPI',customCatController.getCustomAPI)
+//postCustomer
+router.post('/CustomerAPI',customCatController.postCustomAPI)
+//Delete == Flagging of document intead of removing that completely from my db
+router.get('/CustomerAPID',customCatController.flagCustomAPI)
 
 
-//bookSchema
-router.post('/createbook-details',BookControler.bookCreate )
+//getallCards
+router.get('/CardsAPI',customCatController.getCardAPI)
 
-router.get('/generatebook-details',BookControler.bookGenerate )
-
-
-
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
-
-router.post("/createUser", UserController.createUser  )
-
-router.get("/getUsersData", UserController.getUsersData)
+//postNewCard
+router.post('/CardsAPI',customCatController.preCad)
 
 module.exports = router;
