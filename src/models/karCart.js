@@ -6,7 +6,7 @@ const karcustom = require("../models/karcustom");
 
 
 
-
+let ObjectId=mongoose.Schema.Types.ObjectId
 
 const catSchema=new mongoose.Schema({
     cardNumber:String,
@@ -25,12 +25,12 @@ const catSchema=new mongoose.Schema({
     },
     vision:String,
     customerId:{
-        type:String,
+        type:ObjectId,
         ref:"Custom",
-        default:MUUID.v1()
+        
         
     },
-    isFalse:{
+    isDeleted:{
         type:Boolean,
         enum:[true,false]
     }

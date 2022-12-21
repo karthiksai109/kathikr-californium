@@ -41,7 +41,7 @@ const postCustomAPI=async function(req,res){
 module.exports.postCustomAPI=postCustomAPI
 
 const flagCustomAPI=async function(req,res){
-    let updatedData=await kCustomModel.findOneAndUpdate({"firstName":"Keerthi"},{$set:{isFalse:true}},{new:true})
+    let updatedData=await kCustomModel.findOneAndUpdate({"firstName":"Keerthi"},{$set:{isDeleted:true}},{new:true})
     res.send({msg:updatedData})
 }
 module.exports.flagCustomAPI=flagCustomAPI
@@ -53,11 +53,6 @@ const getCardAPI=async function(req,res){
 }
 module.exports.getCardAPI=getCardAPI
 
-// const postCardAPI=async function(req,res){
-//     let createCard=req.body
-//     let updatedCard=await kCatModel.create(createCard)
-//     res.send({msg:updatedCard})
-// }
-// module.exports.postCardAPI=postCardAPI
+
 
 

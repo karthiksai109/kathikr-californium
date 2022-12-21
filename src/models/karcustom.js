@@ -39,7 +39,7 @@ const cusSchema=new mongoose.Schema({
         enum:["ACTIVE","INACTIVE"],
         required:true
     },
-    isFalse:{
+    isDeleted:{
         type:Boolean,
         enum:[true,false],
         default:false
