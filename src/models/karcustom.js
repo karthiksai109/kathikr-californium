@@ -31,7 +31,6 @@ const cusSchema=new mongoose.Schema({
     address:String,
     customerId:{
         type:String,
-        ref:"Card",
         default:MUUID.v1()
     },
     status:{
