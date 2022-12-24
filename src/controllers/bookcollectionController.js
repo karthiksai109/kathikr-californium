@@ -23,17 +23,17 @@ const booksInAYear=async function(req,res){
 module.exports.booksInAYear=booksInAYear
 
 const getParticularBook= async function(req,res){
-    let x=Object.keys(req.body)
-    let y=x.join('')
-    let getParticular=await bookModel1.find()
-    let resarr=[]
-    getParticular.forEach((z,i,a)=>{
-        if(a[i][y]==req.body[y]){
-            resarr.push(a[i])
-        }
+    //let x=Object.keys(req.body)
+    //let y=x.join('')
+    let getParticular=await bookModel1.find(req.body)
+    //let resarr=[]
+    // getParticular.forEach((z,i,a)=>{
+    //     if(a[i][y]==req.body[y]){
+    //         resarr.push(a[i])
+    //     }
 
-    })
-    res.send({msg: resarr})
+   // })
+    res.send({msg: getParticular})
 
 }
 module.exports.getParticularBook=getParticularBook
