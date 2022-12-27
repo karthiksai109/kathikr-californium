@@ -15,9 +15,12 @@ const createUser=async function(req,res){
 
 const loginUser=async function(req,res){
   let data1=req.body
-  let b= await userModel.find(data1)
-  if(b.length>0){
-    let token=jwt.sign({userId:b["id"]},"functionup-karthik")
+  let b= await userModel.findOne(data1)
+  if(b!=null){
+    let x=b
+    //console.log(b["_id"])
+    
+    let token=jwt.sign({userId:b["_id"]},"functionup-karthik")
   return res.send({status:true,data:token})
   }else{
     return res.send({status:false,data:'inavalid user'})
@@ -30,8 +33,8 @@ const getUserData=async function(req,res){
   // if(aut==undefined){
   //   return res.send({status:false,msg:"required token"})
   // }else{
-    let aut=req.headers['x-auth-token']
-    let tokenv=jwt.verify(aut,"functionup-karthik")
+    // let aut=req.headers['x-auth-token']
+    // let tokenv=jwt.verify(aut,"functionup-karthik")
     let data3=mongoose.Types.ObjectId(req.params['userId'])
     let k=await userModel.findById(data3)
     if(k!=null){
@@ -41,8 +44,6 @@ const getUserData=async function(req,res){
       return res.send({status:false,msg:'invalid userId'})
       
     }
-   
-
   }
 //}
 
