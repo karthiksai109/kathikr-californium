@@ -19,7 +19,7 @@ res.send({msg:a})
 
 router.get('/practice',async function(req,res){
     //let data=req.body
-let a=await p.findOne().populate({path:'stories',select:'firstName'})
+let a=await p.updateMany({name:'karthik'},{age:22},{new:true})
 res.send({msg:a})
 })
 

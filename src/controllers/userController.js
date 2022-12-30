@@ -37,6 +37,7 @@ const loginUser=async function(req,res){
   if(b!=null){
     
     let token=jwt.sign({userId:b["_id"]},"functionup-karthik")
+    //res.setHeader('x-auth-token',token)
     return res.status(200).send({status:true,data:token})
   }
   else{
