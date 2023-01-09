@@ -100,7 +100,7 @@ const createIntern = async function (req, res) {
       res
         .status(201)
         .send({
-          status: false,
+          status:true,
           msg: "your data is successfully created",
           data: collegeData,
         
@@ -122,7 +122,7 @@ try{
         return res.status(400).send({status:false,msg:`plese enter collegeName `})
     }
     console.log(data)
-    let getData=await collegeModel.findOne({name:{$eq:data}})
+    let getData=await collegeModel.findOne({name:{$eq:data},isDeleted:false})
    
 
     if(!getData){

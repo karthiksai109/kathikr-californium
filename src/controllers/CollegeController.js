@@ -13,7 +13,7 @@ const validateEmail = function(email) {
  
 const isValidName = function (name) {
     const fnameRegex = /^[A-Za-z]+$/ ;
-    return fnameRegex.test(name);
+    return fnameRegex.test(name.trim());
     
 };
 const isValidFullName = function (fullname) {
@@ -25,7 +25,7 @@ const isValidFullName = function (fullname) {
     })
     let reName=x.join('')
     const fnameRegex = /^[A-Za-z]+$/ ;
-    return fnameRegex.test(reName);
+    return fnameRegex.test(reName.trim());
     
 }
 
@@ -75,7 +75,7 @@ const createCollegeData = async function (req, res) {
     res
       .status(201)
       .send({
-        status: false,
+        status: true,
         msg: "your data is successfully created",
         data: collegeData,
       });

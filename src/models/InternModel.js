@@ -11,13 +11,13 @@ const InternSchema=new mongoose.Schema({
             type:String,
             require:true,
             unique:true,
-            trim:true
+            
          },
          mobile: {
             type:String,
             unique:true,
             require:true,
-            trim:true
+           
 
             }, 
          collegeId: {
