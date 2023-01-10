@@ -1,6 +1,4 @@
-// const e = require("express");
-// const mongoose = require("mongoose");
-// const { find, findOne } = require("../Models/CollegeModel");
+
 const collegeModel = require("../Models/CollegeModel");
 const InternModel=require("../Models/InternModel")
 
@@ -24,6 +22,18 @@ const isValidName = function (name) {
 };
 
 
+const isValidFullName = function (name) {
+    let x=name.split('')
+    x.forEach((y,i)=>{
+        if(y==" "){
+            x.splice(i,1)
+        }
+    })
+    let reName=x.join('')
+    const fnameRegex = /^[A-Za-z]+$/ ;
+    return fnameRegex.test(reName.trim());
+    
+}
 
 
 //-------------------------------------------------------------------------------------create InternData----------------------------------
@@ -42,13 +52,10 @@ const createIntern = async function (req, res) {
       res
         .status(400)
         .send({ status: false, msg: "plese enter your name" });
-    }else if(!isValidName(name)){
-        
+    }else if(!isValidFullName(name.trim())){
         res.status(400)
-        .send({ status: false, msg: "plese enter valid name" });
+        .send({ status: false, msg: "plese enter a valid fullname of your college" });
       
-        
-    
     } else if(mobile==undefined || mobile.trim() ==""){
         res
         .status(400)

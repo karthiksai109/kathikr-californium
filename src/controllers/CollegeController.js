@@ -1,6 +1,3 @@
-const e = require("express");
-const mongoose = require("mongoose");
-const { find, findOne } = require("../Models/CollegeModel");
 const collegeModel = require("../Models/CollegeModel");
 const InternModel=require("../Models/InternModel")
 
