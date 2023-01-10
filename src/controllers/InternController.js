@@ -101,6 +101,8 @@ const createIntern = async function (req, res) {
         if(collegeFilter==null){
             res.status(404).send({status:false,msg:`sorry we cant find college with ${collegeName} `})
         }else{
+            data["email"]=email.trim()
+            data["mobile"]=mobile.trim()
         data["collegeName"]=undefined
         data["collegeId"]=collegeFilter["_id"]
       let collegeData = await InternModel.create(data);
