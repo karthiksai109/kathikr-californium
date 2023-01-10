@@ -5,10 +5,10 @@ const collegeModel = require("../Models/CollegeModel");
 const InternModel=require("../Models/InternModel")
 
 
-const validateEmail = function(email) {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(email)
-};
+// const validateEmail = function(email) {
+//     var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+//     return re.test(email)
+// };
 
  
 const isValidName = function (name) {

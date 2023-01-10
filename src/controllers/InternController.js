@@ -32,7 +32,7 @@ const isValidFullName = function (fullname) {
 
 
 
-let urlreg = /^https?:\/\/(.+\/)+.+(\.(gif|png|jpg|jpeg|webp|svg|psd|bmp|tif))$/i
+// let urlreg = /^https?:\/\/(.+\/)+.+(\.(gif|png|jpg|jpeg|webp|svg|psd|bmp|tif))$/i
 
 
 //-------------------------------------------------------------------------------------create InternData----------------------------------
@@ -129,7 +129,7 @@ try{
         res.status(404).send({status:false,msg:`sorry no collage data found with this collegeName `})
     }
     else{
-        let intern=await InternModel.find({"collegeId":{$eq:getData["_id"]}})
+        let intern=await InternModel.find({"collegeId":{$eq:getData["_id"]},isDeleted:false}).select({name:1,email:1,mobile:1})
     
         getData["_id"]=undefined
         if(intern.length==0){
