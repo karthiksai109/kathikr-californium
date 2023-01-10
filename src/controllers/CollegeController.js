@@ -8,8 +8,6 @@ const isValidaName=function (name) {
 };
 
 
-
-
 const isValidName = function (name) {
     const fnameRegex = /^[A-Za-z]+$/ ;
     return fnameRegex.test(name.trim());
@@ -81,7 +79,13 @@ const createCollegeData = async function (req, res) {
     }else if(!urlreg.test(logoLink)){
         res.status(400).send({ status: false, msg: "plese enter valid logoLink" });
     
-  } else {
+     } else if(data["isDeleted"]==true){
+          return  res.status(400)
+          .send({ status: false, msg:"plese check your isDeleted key status" });
+      
+  
+  
+      } else {
     
     let collegeData = await collegeModel.create(data);
     res

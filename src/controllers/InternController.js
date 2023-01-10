@@ -41,8 +41,8 @@ const createIntern = async function (req, res) {
     try{
     let data = req.body;
     let { name, mobile, email, collegeName } = data;
-    let fitermobile=await InternModel.findOne({$or:[{"mobile":mobile },{"email":email}]})
-        
+    let fiteremail=await InternModel.findOne({"email":email.trim()})
+    let fitermobile=await InternModel.findOne({"mobile":mobile.trim()})
     if (Object.keys(data).length==0) {
         
       return res
@@ -55,31 +55,31 @@ const createIntern = async function (req, res) {
     }else if(!isValidFullName(name.trim())){
         res.status(400)
         .send({ status: false, msg: "plese enter a valid fullname of your college" });
-      
+    }else if(email==undefined || email.trim()==""){
+        return res
+         .status(400)
+         .send({ status: false, msg: "plese enter your emailId" })
+     
+     }else if(!validateEmail(email)){
+        return res
+         .status(400)
+         .send({ status: false, msg: "plese enter valid emailId" })
+ 
+     }else if(fiteremail){
+        return res
+         .status(400)
+         .send({ status: false, msg: " emailId already registered" })  
+    
     } else if(mobile==undefined || mobile.trim() ==""){
         res
         .status(400)
         .send({ status: false, msg: "plese enter your mobieNumber" })
+
     }else if (!/^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobile.trim())) {
         return res.status(400).send({ status:false, message:"Enter valid mobile number" })
     
-    }else if(fitermobile && fitermobile["mobile"]==mobile){
+    }else if(fitermobile){
         return res.status(400).send({ status:false, message:" mobile number already registered" })
-
-    }else if(email==undefined || email.trim()==""){
-       return res
-        .status(400)
-        .send({ status: false, msg: "plese enter your emailId" })
-    
-    }else if(!validateEmail(email)){
-       return res
-        .status(400)
-        .send({ status: false, msg: "plese enter valid emailId" })
-
-    }else if(fitermobile && fitermobile["email"]==email){
-       return res
-        .status(400)
-        .send({ status: false, msg: " emailId already registered" })
 
     
     }else if (collegeName == undefined || collegeName.trim() == "") {
@@ -90,11 +90,12 @@ const createIntern = async function (req, res) {
        
        return  res.status(400)
         .send({ status: false, msg: "plese enter a valid name of your college" });
-      
-        
+    }else if(data["isDeleted"]==true){
+        return  res.status(400)
+        .send({ status: false, msg:"plese check your isDeleted key status" });
     
     } else {
-        name
+        
         let collegeFilter=await collegeModel.findOne({"name":collegeName})
         console.log(collegeFilter)
         if(collegeFilter==null){
