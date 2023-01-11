@@ -13,18 +13,11 @@ const isValidName = function (name) {
     return fnameRegex.test(name.trim());
     
 };
+
 const isValidFullName = function (fullname) {
-    let x=fullname.split('')
-    x.forEach((y,i)=>{
-        if(y==" "){
-            x.splice(i,1)
-        }
-    })
-    let reName=x.join('')
-    const fnameRegex = /^[A-Za-z]+$/ ;
-    return fnameRegex.test(reName.trim());
-    
-}
+  const validName = /^[a-z A-Z,]{1,50}$/;
+  return validName.test(fullname);
+};
 
 
 

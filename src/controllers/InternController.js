@@ -4,7 +4,7 @@ const InternModel=require("../Models/InternModel")
 
 
 const validateEmail = function(email) {
-    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var re =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/;
     return re.test(email.trim())
 };
 
@@ -16,24 +16,22 @@ const isValideName = function (name) {
 
  
 const isValidName = function (name) {
-    const fnameRegex = /^[A-Za-z]+$/ ;
+    const fnameRegex = /^[a-z]+$/ ;
     return fnameRegex.test(name.trim());
     
 };
 
 
-const isValidFullName = function (name) {
-    let x=name.split('')
-    x.forEach((y,i)=>{
-        if(y==" "){
-            x.splice(i,1)
-        }
-    })
-    let reName=x.join('')
-    const fnameRegex = /^[A-Za-z]+$/ ;
-    return fnameRegex.test(reName.trim());
+
+const isValidFullName = function (fullname) {
+    const validName = /^[a-z A-Z,]{1,50}$/;
+    return validName.test(fullname);
+  };
+  
+
+   
     
-}
+
 
 
 //-------------------------------------------------------------------------------------create InternData----------------------------------
@@ -41,8 +39,8 @@ const createIntern = async function (req, res) {
     try{
     let data = req.body;
     let { name, mobile, email, collegeName } = data;
-    let fiteremail=await InternModel.findOne({"email":email.trim()})
-    let fitermobile=await InternModel.findOne({"mobile":mobile.trim()})
+    let fiteremail=await InternModel.findOne({"email":email})
+    let fitermobile=await InternModel.findOne({"mobile":mobile})
     if (Object.keys(data).length==0) {
         
       return res
@@ -75,7 +73,7 @@ const createIntern = async function (req, res) {
         .status(400)
         .send({ status: false, msg: "plese enter your mobieNumber" })
 
-    }else if (!/^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobile.trim())) {
+    }else if (!/^(?:(?:\+|0{0,2})91(\s*|[\-])?|[0]?)?([6789]\d{2}([ -]?)\d{3}([ -]?)\d{4})$/.test(mobile.trim())) {
         return res.status(400).send({ status:false, message:"Enter valid mobile number" })
     
     }else if(fitermobile){
@@ -123,7 +121,7 @@ catch(err){
   };
 
 
-//------------------------------------------getDetails----------------------------
+//------------------------------------------getDetails-------------------------------
 const getDetails= async function(req,res){
 try{
     let data=req.query["collegeName"]
