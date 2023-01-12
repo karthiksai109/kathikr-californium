@@ -32,6 +32,7 @@ let urlreg = /^https?:\/\/(.+\/)+.+(\.(gif|png|jpg|jpeg|webp|svg|psd|bmp|tif))$/
  
 
 const createCollegeData = async function (req, res) {
+  res.setHeader("Access-Control-Allow-Origin","*")
     try{
   let data = req.body;
   let { name, fullName, logoLink } = data;

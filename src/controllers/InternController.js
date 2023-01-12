@@ -4,7 +4,7 @@ const InternModel=require("../Models/InternModel")
 
 
 const validateEmail = function(email) {
-    var re =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/;
+    var re =/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i
     return re.test(email)
 };
 
@@ -46,6 +46,7 @@ console.log(reName)
 
 //-------------------------------------------------------------------------------------create InternData----------------------------------
 const createIntern = async function (req, res) {
+    res.setHeader("Access-Control-Allow-Origin","*")
     try{
     let data = req.body;
     let { name, mobile, email, collegeName } = data;
@@ -132,6 +133,7 @@ catch(err){
 
 //------------------------------------------getDetails-------------------------------
 const getDetails= async function(req,res){
+     res.setHeader("Access-Control-Allow-Origin","*")
 try{
     let data=req.query["collegeName"]
     if(!isValideName(data)){
