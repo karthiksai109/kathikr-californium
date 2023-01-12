@@ -5,7 +5,7 @@ const InternModel=require("../Models/InternModel")
 
 const validateEmail = function(email) {
     var re =  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/;
-    return re.test(email.trim())
+    return re.test(email)
 };
 
 const isValideName = function (name) {
@@ -17,15 +17,25 @@ const isValideName = function (name) {
  
 const isValidName = function (name) {
     const fnameRegex = /^[a-z]+$/ ;
-    return fnameRegex.test(name.trim());
+    return fnameRegex.test(name);
     
 };
 
 
 
 const isValidFullName = function (fullname) {
-    const validName = /^[a-z A-Z,]{1,50}$/;
-    return validName.test(fullname);
+    let x=fullname.split('')
+    
+ x.forEach((y,i)=>{
+    if(y==" "){
+        x.splice(i,1)
+    }
+ })
+    let reName=x.join('')
+console.log(reName)
+    const validName = /^[A-Za-z]+$/;
+    console.log(validName.test(reName))
+    return validName.test(reName);
   };
   
 
@@ -42,7 +52,6 @@ const createIntern = async function (req, res) {
     let fiteremail=await InternModel.findOne({"email":email})
     let fitermobile=await InternModel.findOne({"mobile":mobile})
     if (Object.keys(data).length==0) {
-        
       return res
         .status(400)
         .send({ status: false, msg: "plese enter some data in order to create" });
@@ -52,13 +61,13 @@ const createIntern = async function (req, res) {
         .send({ status: false, msg: "plese enter your name" });
     }else if(!isValidFullName(name.trim())){
         res.status(400)
-        .send({ status: false, msg: "plese enter a valid fullname of your college" });
+        .send({ status: false, msg: "plese enter a valid name" });
     }else if(email==undefined || email.trim()==""){
         return res
          .status(400)
          .send({ status: false, msg: "plese enter your emailId" })
      
-     }else if(!validateEmail(email)){
+     }else if(!validateEmail(email.trim())){
         return res
          .status(400)
          .send({ status: false, msg: "plese enter valid emailId" })
@@ -84,7 +93,7 @@ const createIntern = async function (req, res) {
       return res
         .status(400)
         .send({ status: false, msg: "plese enter of your collegeName" });
-    }else if(!isValidName(collegeName)){
+    }else if(!isValidName(collegeName.trim())){
        
        return  res.status(400)
         .send({ status: false, msg: "plese enter a valid name of your college" });
